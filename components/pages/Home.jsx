@@ -1,13 +1,40 @@
 import { assets } from '@/config/pages/home.js';
+import { useUser, useRedirectFunctions, useLogoutFunction } from "@propelauth/nextjs/client";
+
 
 import Image from 'next/image';
 
 const Home = ({ setPage }) => {
+	const { loading, user } = useUser()
+	const { redirectToSignupPage, redirectToLoginPage, redirectToAccountPage } = useRedirectFunctions()
+	const logoutFn = useLogoutFunction()
+
 	const databases = ['MongoDB', 'SQL', 'Graph'];
 	const locked = [false, true, true];
 
 	return (
 		<section className='w-screen h-screen overflow-hidden flex justify-center bg-home-bg bg-cover bg-bottom'>
+
+			<div className='absolute top-4 right-4'>
+				{user ? (
+					<>
+						<button 
+							onClick={redirectToAccountPage}
+							className='flex gap-4 text-center w-full justify-center py-2 font-semibold text-xl rounded-full border-2 px-4 transition-all hover:bg-opacity-65 bg-gradient-to-b from-green-500 border-green-800 to-green-500 via-green-700'>
+								Account
+							</button>
+						<button onClick={logoutFn}>Logout</button>
+					</>
+				) : (
+					<>
+						<button onClick={redirectToLoginPage}
+						className='flex gap-4 text-center w-full justify-center py-2 font-semibold text-xl rounded-full border-2 px-4 transition-all hover:bg-opacity-65 bg-gradient-to-b from-green-500 border-green-800 to-green-500 via-green-700'>
+							Login
+						</button>
+					</>
+				)}
+			</div>
+
 			<div className='flex items-center'>
 				<div>
 					<Image alt='dog' src={assets.dog} />

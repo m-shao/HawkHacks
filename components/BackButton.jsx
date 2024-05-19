@@ -1,13 +1,9 @@
-import React from 'react';
-
+'use client'
 const BackButton = ({ setPage }) => {
-	const handleClick = () => {
-		setPage((prev) => prev - 1);
-	};
 
 	return (
 		<button
-			onClick={handleClick}
+			onClick={()=> setPage(prev => prev - 1)}
 			className=' p-1 bg-white rounded-xl fixed top-6 left-6 z-10'>
 			<div className='p-4 bg-green-800 rounded-xl'>
 				<svg
