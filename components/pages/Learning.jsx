@@ -13,7 +13,7 @@ const Learning = ({ paragraph, titleImage, setPage, setPrompt, setSchema }) => {
     e.preventDefault();
     let prompt = `Please generate a mongoDB compatible db schema for an app about "${topic}. So to be clear, I want you to output a raw JSON schema that can be used for a database for "${topic}".`;
     try {
-      fetch("/api/gemma?prompt=" + prompt).then((res) => {
+      fetch("/api/neural?prompt=" + prompt).then((res) => {
         res.json().then((data) => {
           setSchema(data.response);
         });

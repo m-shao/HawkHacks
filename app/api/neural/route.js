@@ -1,5 +1,5 @@
 import { NextResponse } from "next/server";
-import generateSchema from "./gemma";
+import generateSchema from "./neural";
 
 export async function GET(req) {
   const { searchParams } = new URL(req.url);

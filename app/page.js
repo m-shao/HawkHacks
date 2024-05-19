@@ -32,15 +32,15 @@ const Page = () => {
 	useEffect(() => {
 		if (prompt === '') return;
 		console.log(prompt)
-		const neurelo_prompt = `Given the topic of: "${prompt}, I want you to generate me RAW valid JSON dict containg array containing some questions testing basic knowledge a mongodb schema for an app centered "${prompt}" so like relate the questions to that app. Index 0 should be the correct answer, and the rest should be incorrect answers. The questions should be formatted as follows: questions: {{question: "What is the capital of France?", options: ["Paris", "Berlin", "Madrid", "Rome"]}}. The most important parts are it's only 1 dict and it's perfectly valid JSON, don't wrap in anything, it's being directly passed into JSON.parse  `;
+		const neurelo_prompt = `Given the topic of: "${prompt}, I want you to generate me RAW valid JSON dict containg array containing some questions testing basic knowledge **ABOUT A mongodb SCHEMA for an app centered "${prompt}"** so like relate the questions to that app. Index 0 should be the correct answer, and the rest should be incorrect answers. The questions should be formatted as follows: questions: {{question: "What is the capital of France?", options: ["Paris", "Berlin", "Madrid", "Rome"]}}. The most important parts are it's only 1 dict and it's perfectly valid JSON, don't wrap in anything, it's being directly passed into JSON.parse  `;
 		try {
-			fetch("/api/gemma?prompt=" + neurelo_prompt).then((res) => {
+			fetch("/api/neural?prompt=" + neurelo_prompt).then((res) => {
 				res.json().then((data) => {
 					const parsed = JSON.parse(data.response);
 					setQuestionSet(parsed.questions[0].options);
 					setQuestion(parsed.questions[0].question);
 				})
-		
+
 			});
 		}
 		catch (e) {
@@ -86,40 +86,51 @@ const Page = () => {
 			question={question}
 		/>,
 		<Information2 key='5' setPage={setPage} />,
-		<Learning2 key='6' setPage={setPage} />,
-		<Success key='7' score={score} restart={continueGame} />,
-		<Faliure key='8' score={score} restart={restart} />,
-		<RoadMap key='9' setPage={setPage} index={1} />,
-		<Learning2 key='6' setPage={setPage} setPrompt={setPrompt} />,
-		<DisplayData key='7' setPage={setPage} schema={schema} />,
+		<DisplayData key='6' setPage={setPage} schema={schema} />,
+		<Learning2 key='7' setPage={setPage} />,
 		<Success key='8' score={score} restart={continueGame} />,
 		<Faliure key='9' score={score} restart={restart} />,
-		<RoadMap key='10' setPage={setPage} index={1} />,
-		<Quiz
+		// second quiz
+		<RoadMap key='10' setPage={setPage} index={0} />,
+		<Learning
 			key='11'
+			setPage={setPage}
+			paragraph={sections[0].text}
+			setPrompt={setPrompt}
+			setSchema={setSchema}
+			titleImage={sections[0].image}
+		/>,
+		<Information key='12' setPage={setPage} />,
+		<Quiz
+			key='13'
 			setPage={setPage}
 			setHealth={setHealth}
 			correct={questionSet[0]}
 			options={questionSet}
 			question={question}
 		/>,
-		<RoadMap key='12' setPage={setPage} index={1} />,
-		<Success key='13' score={score} restart={restart} />,
-		<Faliure key='14' score={score} restart={restart} />,
+		<Information2 key='14' setPage={setPage} />,
+		<RoadMap key='15' setPage={setPage} index={1} />,
+
+		<Learning2 key='16' setPage={setPage} />,
+		<Success key='17' score={score} restart={continueGame} />,
+		<Faliure key='18' score={score} restart={restart} />,
 	];
 
 	useEffect(() => {
 		if (health === 0) {
-			setPage(pages.length - 2);
+			setPage(pages.length - 1);
 			setHealth(3);
 		}
 	}, [health, pages.length, setPage]);
-
+	if (page < 0) {
+		setPage(0);
+	}
 	return (
 		<div className='w-screen h-screen'>
 			{health !== 0 && page !== 0 && <HealthBar health={health} />}
 			{page !== 0 && <BackButton setPage={setPage} />}
-			{pages[page]}
+			{pages[Math.max(0, page)]}
 		</div>
 	);
 };
