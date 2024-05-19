@@ -1,6 +1,8 @@
 import { Inter } from 'next/font/google';
 import './globals.css';
-import './backend/mongo/interface.js';
+import { client } from './backend/mongo/interface.js';
+
+console.log(client);
 
 const inter = Inter({ subsets: ['latin'] });
 
