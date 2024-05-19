@@ -31,7 +31,7 @@ const Page = () => {
 	useEffect(() => {
 		if (prompt === '') return;
 		// const generateQuestionset = () => {
-		const neurelo_prompt = `Given the topic of: "${prompt}, I want you to generate me 1 valid JSON dict containg array containing some questions testing basic knowledge on what would be in a database schema for an app about "${prompt}". Index 0 should be the correct answer, and the rest should be incorrect answers. The questions should be formatted as follows: {question: "What is the capital of France?", options: ["Paris", "Berlin", "Madrid", "Rome"]}.`;
+		const neurelo_prompt = `Given the topic of: "${prompt}, I want you to generate me 1 valid JSON dict containg array containing some questions testing basic knowledge a mongodb schema for an app about "${prompt}". Index 0 should be the correct answer, and the rest should be incorrect answers. The questions should be formatted as follows: {question: "What is the capital of France?", options: ["Paris", "Berlin", "Madrid", "Rome"]}.`;
 		fetch("/api/gemma?prompt=" + neurelo_prompt).then((res) => {
 			res.json().then((data) => {
 				console.log();
