@@ -28,7 +28,7 @@ const Information = ({ setPage }) => {
 						MongoDB Docs{' '}
 					</a>
 					Example For the petstores, a basic query to find all pets
-					named "John" might look like this:
+					named {'"John"'} might look like this:
 					<h1> db.books.find{'({ "name": "John" })'}</h1>
 					<h1>
 						To update the likes of Johns you could use:
