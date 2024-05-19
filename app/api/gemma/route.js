@@ -6,8 +6,5 @@ export async function GET(req) {
   const prompt = searchParams.get("prompt");
   let response = await generateSchema(prompt);
   console.log(response);
-  return NextResponse.json(
-    { response: response },
-    { status: 200 }
-  );
+  return NextResponse.json({ response: response }, { status: 200 });
 }
