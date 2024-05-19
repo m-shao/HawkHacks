@@ -11,7 +11,7 @@ const Learning = ({ paragraph, titleImage }) => {
   const [dataset, setDataset] = useState({});
 
   const generateDataset = () => {
-    let prompt = `Can you please generate me a mongodb database schema for "${topic}"? So like a db schema that would work for that topic. Please output the schema in JSON format.`;
+    let prompt = `Can you please generate me a mongodb database schema for "${topic}"? So like a db schema that would work for that topic. Please output the schema in JSON format. RAW JSON no extra stuff.`;
     fetch("/api/gemma?prompt=" + prompt).then((res) => {
       res.json().then((data) => {
         setDataset(data.response);
