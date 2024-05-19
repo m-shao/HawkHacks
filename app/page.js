@@ -56,7 +56,7 @@ const Page = () => {
 
 	return (
 		<div className='w-screen h-screen'>
-			{health !== 0 && <HealthBar health={health} />}
+			{(health !== 0 && page !== 0) && <HealthBar health={health} />}
 			{page !== 0 && <BackButton setPage={setPage} />}
 			{pages[page]}
 		</div>

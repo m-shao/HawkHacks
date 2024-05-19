@@ -10,6 +10,7 @@
   },
   "dependencies": {
     "@google/generative-ai": "^0.11.3",
+    "@propelauth/nextjs": "^0.1.2",
     "framer-motion": "^11.2.4",
     "mongodb": "^6.6.2",
     "neurelo-sdk": "file:neurelo-sdk-typescript-cmt_fc8156.tgz",
