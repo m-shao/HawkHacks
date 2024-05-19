@@ -12,6 +12,7 @@ import Faliure from '@/components/pages/Faliure';
 import Success from '@/components/pages/Success';
 import Information from '@/components/pages/Information';
 import Information2 from '@/components/pages/Information2';
+import DisplayData from '@/components/pages/DisplayData';
 
 import BackButton from '@/components/BackButton';
 import HealthBar from '@/components/HealthBar';
@@ -39,6 +40,7 @@ const Page = () => {
 					setQuestionSet(parsed.questions[0].options);
 					setQuestion(parsed.questions[0].question);
 				})
+		
 			});
 		}
 		catch (e) {
@@ -88,17 +90,22 @@ const Page = () => {
 		<Success key='7' score={score} restart={continueGame} />,
 		<Faliure key='8' score={score} restart={restart} />,
 		<RoadMap key='9' setPage={setPage} index={1} />,
+		<Learning2 key='6' setPage={setPage} setPrompt={setPrompt} />,
+		<DisplayData key='7' setPage={setPage} schema={schema} />,
+		<Success key='8' score={score} restart={continueGame} />,
+		<Faliure key='9' score={score} restart={restart} />,
+		<RoadMap key='10' setPage={setPage} index={1} />,
 		<Quiz
-			key='3'
+			key='11'
 			setPage={setPage}
 			setHealth={setHealth}
 			correct={questionSet[0]}
 			options={questionSet}
 			question={question}
 		/>,
-		<RoadMap key='4' setPage={setPage} index={1} />,
-		<Success key='5' score={score} restart={restart} />,
-		<Faliure key='6' score={score} restart={restart} />,
+		<RoadMap key='12' setPage={setPage} index={1} />,
+		<Success key='13' score={score} restart={restart} />,
+		<Faliure key='14' score={score} restart={restart} />,
 	];
 
 	useEffect(() => {
