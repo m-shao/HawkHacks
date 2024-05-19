@@ -17,10 +17,6 @@ import BackButton from '@/components/BackButton';
 import HealthBar from '@/components/HealthBar';
 
 import { sections } from '@/config/pages/sections';
-//question, options, correct,
-const question = 'What is the capital of France?';
-const options = ['Paris', 'Berlin', 'Madrid', 'Rome'];
-const correct = 'Paris';
 
 const Page = () => {
 	const [page, setPage] = useState(0);
