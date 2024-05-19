@@ -9,9 +9,10 @@
     "lint": "next lint"
   },
   "dependencies": {
-    "framer-motion": "^11.2.4",
     "@google/generative-ai": "^0.11.3",
+    "framer-motion": "^11.2.4",
     "mongodb": "^6.6.2",
+    "neurelo-sdk": "file:neurelo-sdk-typescript-cmt_fc8156.tgz",
     "next": "14.2.3",
     "react": "^18",
     "react-dom": "^18"
