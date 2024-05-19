@@ -1,5 +1,6 @@
 import './globals.css';
 import { Inter } from 'next/font/google';
+import { AuthProvider } from "@propelauth/nextjs/client";
 
 const inter = Inter({ subsets: ['latin'] });
 
@@ -11,9 +12,12 @@ export const metadata = {
 export default function RootLayout({ children }) {
 	return (
 		<html lang='en'>
-			<body className={inter.className + ' text-regular'}>
-				{children}
-			</body>
+			<AuthProvider authUrl={process.env.NEXT_PUBLIC_AUTH_URL}>
+				<body className={inter.className + ' text-regular'}>
+					{children}
+				</body>
+			</AuthProvider>
+
 		</html>
 	);
 }
