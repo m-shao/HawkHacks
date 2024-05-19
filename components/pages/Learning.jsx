@@ -11,13 +11,12 @@ const Learning = ({ paragraph, titleImage }) => {
 	const [dataset, setDataset] = useState({});
 
 	const generateDataset = () => {
-		prompt = `Can you please generate me a mongodb database schema for ${topic}? So like a db schema that`
-		fetch("/api/gemma?prompt=" + topic).then((res) => {
-			res.json().then((data) => {
-				setDataset(data.response);
-			});
-			
-		});
+		let prompt = `Can you please generate me a mongodb database schema for "${topic}"? So like a db schema that would work for that topic. Please output the schema in JSON format.`
+		fetch("/api/gemma?prompt=" + prompt).then((res) => {
+      res.json().then((data) => {
+        setDataset(data.response);
+      });
+    });
 		console.log(dataset);
 	};
 
@@ -31,7 +30,6 @@ const Learning = ({ paragraph, titleImage }) => {
 					{ paragraph }
 				</div>
 				<form onSubmit={() => {generateDataset();
-
 				}} className='w-full max-w-[60rem] p-6 text-2xl flex flex-col gap-2 text-white font-semibold bg-white rounded-2xl shadow-2xl bg-gradient-to-b from-green-800 border-[3px] border-green-600 to-green-700'>
 					<label htmlFor='topic'>
 						Data set would you like to learn with: (e.g. Application that stores info about dogs)
