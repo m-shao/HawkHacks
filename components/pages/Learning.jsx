@@ -4,28 +4,37 @@ import { useEffect, useState } from 'react';
 
 import Image from 'next/image';
 
-import introduction from '@/assets/introduction/text.png';
-
 import BackButton from '@/components/BackButton.jsx';
 
-const Introduction = () => {
+const Learning = ({ paragraph, titleImage }) => {
 	const [topic, setTopic] = useState('');
+	const [dataset, setDataset] = useState({});
+
+	const generateDataset = () => {
+		prompt = `Can you please generate me a mongodb database schema for ${topic}? So like a db schema that`
+		fetch("/api/gemma?prompt=" + topic).then((res) => {
+			res.json().then((data) => {
+				setDataset(data.response);
+			});
+			
+		});
+		console.log(dataset);
+	};
+
 
 	return (
 		<div className='w-screen h-screen bg-explain-bg flex flex-col gap-6 items-center'>
 			<BackButton />
 			<div className='w-full flex flex-col items-center gap-8 justify-center h-full'>
-				<Image alt='introduction text' src={introduction} />
+				<Image alt='title text' src={titleImage} />
 				<div className='w-full max-w-[55rem] text- p-6 text-2xl text-black bg-white rounded-2xl shadow-2xl leading-10'>
-					Lorem ipsum dolor sit amet consectetur. Aliquet vitae non
-					fermentum amet convallis pretium lorem nulla quam. Elit amet
-					feugiat ullamcorper dignissim tincidunt nunc ornare. Nulla
-					mauris consequat odio pulvinar nulla leo risus. Dolor
-					commodo lectus volutpat urna diam tellus malesuada lacus a.
+					{ paragraph }
 				</div>
-				<form className='w-full max-w-[60rem] p-6 text-2xl flex flex-col gap-2 text-white font-semibold bg-white rounded-2xl shadow-2xl bg-gradient-to-b from-green-800 border-[3px] border-green-600 to-green-700'>
+				<form onSubmit={() => {generateDataset();
+
+				}} className='w-full max-w-[60rem] p-6 text-2xl flex flex-col gap-2 text-white font-semibold bg-white rounded-2xl shadow-2xl bg-gradient-to-b from-green-800 border-[3px] border-green-600 to-green-700'>
 					<label htmlFor='topic'>
-						Data set would you like to learn with:
+						Data set would you like to learn with: (e.g. Application that stores info about dogs)
 					</label>
 					<input
 						name='topic'
@@ -42,4 +51,4 @@ const Introduction = () => {
 	);
 };
 
-export default Introduction;
+export default Learning;
