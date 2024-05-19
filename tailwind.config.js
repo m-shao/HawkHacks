@@ -10,6 +10,7 @@ module.exports = {
 			backgroundImage: {
 				'home-bg': "url('/home-bg.png')",
 				'explain-bg': "url('/explain-bg.png')",
+				'quiz-bg': "url('/quiz-bg.png')",
 			},
 		},
 	},
