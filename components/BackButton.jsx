@@ -8,7 +8,7 @@ const BackButton = ({ setPage }) => {
 	return (
 		<button
 			onClick={handleClick}
-			className=' p-1 bg-white rounded-xl fixed top-6 left-6'>
+			className=' p-1 bg-white rounded-xl fixed top-6 left-6 z-10'>
 			<div className='p-4 bg-green-800 rounded-xl'>
 				<svg
 					xmlns='http://www.w3.org/2000/svg'
