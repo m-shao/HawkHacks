@@ -40,8 +40,5 @@ Practical Projects: Apply your database knowledge to real-world projects. Build 
 
 ## Running Locally
 1. fill out .env with the creds 
-2. ```bash
-npm i && npm run dev
-```
-
+2. `npm i && npm run dev`
 3. Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
