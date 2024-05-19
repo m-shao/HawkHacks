@@ -23,12 +23,12 @@ const Information = ({ setPage }) => {
 					(string, number) or complex (nested documents, arrays).
 					These databases are flexible, allowing for varying
 					structures within the same collection, making them ideal for
-					evolving data schemas. Ex. For an online bookstore, a book
-					document might look like this:
-					<h1>title: {"'The Great Gatsby'"},</h1>
-					<h1>author: {"'F. Scott Fitzgerald'"},</h1>
-					<h1>published_year: 1925,</h1>
-					<h1>genres: {"['Fiction', 'Classic']"},</h1>
+					evolving data schemas. Ex. For an pet shop, a pet document
+					might look like this:
+					<h1>name: {"'Pluto'"},</h1>
+					<h1>breed: {"'Boston'"},</h1>
+					<h1>age: 2,</h1>
+					<h1>likes: {"['Bones', 'People']"},</h1>
 				</div>
 			</div>
 		</div>
