@@ -13,6 +13,7 @@ const Learning = ({ setPage, setPrompt, setSchema }) => {
 
 	const generateDataset = (e) => {
 		e.preventDefault();
+							setPage((prev) => prev + 1);
 		let prompt = `Please check if this query: "${topic} for mongoDB is valid and will work as expected. Please export your answer as either "yes" or "no" and nothing else`;
 		fetch('/api/gemma?prompt=' + prompt).then((res) => {
 			res.json().then((data) => {
@@ -37,15 +38,14 @@ const Learning = ({ setPage, setPrompt, setSchema }) => {
 				<Image alt='title text' src={titleImage} />
 				<div className='w-full max-w-[55rem] text- p-6 text-2xl text-black bg-white rounded-2xl shadow-2xl leading-10'>
 					{
-						"Write a query that you'd like to learn about dogs. We'll check if it's valid and will work as expected."
+						"Attempt to write a mongodb query that you'd like to learn about dogs. We'll check if it's valid and will work as expected."
 					}
 				</div>
 				<form
 					onSubmit={generateDataset}
 					className='w-full max-w-[60rem] p-6 text-2xl flex flex-col gap-2 text-white font-semibold bg-white rounded-2xl shadow-2xl bg-gradient-to-b from-green-800 border-[3px] border-green-600 to-green-700'>
 					<label htmlFor='topic'>
-						Data set would you like to learn with: (e.g. Application
-						that stores info about dogs)
+						don't forget the previous slide! (hint: db.x...)
 					</label>
 					<input
 						name='topic'

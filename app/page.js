@@ -31,13 +31,13 @@ const Page = () => {
 	useEffect(() => {
 		if (prompt === '') return;
 		// const generateQuestionset = () => {
-		const neurelo_prompt = `Given the topic of: "${prompt}, I want you to generate me 1 valid JSON dict containg array containing some questions testing basic knowledge a mongodb schema for an app about "${prompt}". Index 0 should be the correct answer, and the rest should be incorrect answers. The questions should be formatted as follows: {question: "What is the capital of France?", options: ["Paris", "Berlin", "Madrid", "Rome"]}.`;
+		const neurelo_prompt = `Given the topic of: "${prompt}, I want you to generate me RAW valid JSON dict containg array containing some questions testing basic knowledge a mongodb schema for an app about "${prompt}". Index 0 should be the correct answer, and the rest should be incorrect answers. The questions should be formatted as follows: questions: {{question: "What is the capital of France?", options: ["Paris", "Berlin", "Madrid", "Rome"]}}. The most important parts are it's only 1 dict and it's perfectly valid JSON, don't wrap in anything, it's being directly passed into JSON.parse  `;
 		fetch("/api/gemma?prompt=" + neurelo_prompt).then((res) => {
 			res.json().then((data) => {
 				console.log();
 				const parsed = JSON.parse(data.response);
-				setQuestionSet(parsed.options);
-				setQuestion(parsed.question);
+				setQuestionSet(parsed.questions[0].options);
+				setQuestion(parsed.questions[0].question);
 			});
 		});
 		setPage((prev) => prev + 1);
@@ -73,7 +73,7 @@ const Page = () => {
 			question={question}
 		/>,
 		<Information2 key='5' setPage={setPage} />,
-		<Learning2 key='6' setPage={setPage} />,
+		<Learning2 key='6' setPage={setPage} setPrompt={setPrompt} />,
 		<Success key='7' score={score} restart={continueGame} />,
 		<Faliure key='8' score={score} restart={restart} />,
 		<RoadMap key='9' setPage={setPage} index={1} />,

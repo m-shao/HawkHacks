@@ -6,5 +6,12 @@ const model = genAI.getGenerativeModel({ model: "gemini-pro" });
 
 export default async function generateSchema(prompt) {
   const result = await model.generateContent(prompt);
-  return result.response.text();
+  let responseData = result.response.text();
+  if (responseData.startsWith('```json')) {
+    responseData = responseData.split('```json')[1];
+  }
+  if (responseData.endsWith('```')) {
+    responseData = responseData.split('```')[0];
+  }
+  return responseData;
 }

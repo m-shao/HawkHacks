@@ -17,6 +17,7 @@ const Learning = ({ paragraph, titleImage, setPage, setPrompt, setSchema }) => {
       });
     });
     setPage((prev) => prev + 1);
+    setPrompt(e.target.value);
   };
 
   return (
@@ -41,7 +42,6 @@ const Learning = ({ paragraph, titleImage, setPage, setPrompt, setSchema }) => {
             value={topic}
             onChange={(e) => {
               setTopic(e.target.value);
-              setPrompt(e.target.value);
             }}
             type="text"
           />
