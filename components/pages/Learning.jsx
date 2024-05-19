@@ -1,7 +1,9 @@
 "use client";
 
-import { useEffect, useState } from "react";
+import { useState } from "react";
+import BackButton from "@/components/BackButton";
 
+import { sections } from "@/config/pages/sections";
 import Image from "next/image";
 
 const Learning = ({ paragraph, titleImage, setPage }) => {
@@ -10,22 +12,13 @@ const Learning = ({ paragraph, titleImage, setPage }) => {
 
   const generateDataset = (e) => {
     e.preventDefault();
-    let prompt = `Can you please generate me a mongodb database schema for "${topic}"? So like a db schema that would work for that topic. Please output the schema in JSON format. RAW JSON no extra stuff.`;
+    let prompt = `Please generate a mongoDB compatible db schema for an app about "${topic}. So to be clear, I want you to output a raw JSON schema that can be used for a database for "${topic}".`;
     fetch("/api/gemma?prompt=" + prompt).then((res) => {
       res.json().then((data) => {
         setDataset(data.response);
       });
     });
     setPage((prev) => prev + 1);
-  };
-
-  const generateDataset = () => {
-    let prompt = `Please generate a mongoDB compatible db schema for "${topic}. So to be clear, I want you to output a raw JSON schema that can be used for a database for "${topic}".`;
-    fetch("/api/gemma?prompt=" + prompt).then((res) => {
-      res.json().then((data) => {
-        setDataset(data.response);
-      });
-    });
   };
 
   return (
@@ -37,9 +30,7 @@ const Learning = ({ paragraph, titleImage, setPage }) => {
           {paragraph}
         </div>
         <form
-          onSubmit={() => {
-            generateDataset();
-          }}
+          onSubmit={generateDataset}
           className="w-full max-w-[60rem] p-6 text-2xl flex flex-col gap-2 text-white font-semibold bg-white rounded-2xl shadow-2xl bg-gradient-to-b from-green-800 border-[3px] border-green-600 to-green-700"
         >
           <label htmlFor="topic">
