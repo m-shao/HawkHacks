@@ -3,7 +3,6 @@
 import { useState } from "react";
 import BackButton from "@/components/BackButton";
 
-import { sections } from "@/config/pages/sections";
 import Image from "next/image";
 
 const Learning = ({ paragraph, titleImage, setPage, setPrompt, setSchema }) => {

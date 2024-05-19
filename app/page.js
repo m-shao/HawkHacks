@@ -30,7 +30,7 @@ const Page = () => {
 	useEffect(() => {
 		if (prompt === "") return;
 		// const generateQuestionset = () => {
-		const neurelo_prompt = `Given the topic of: "${prompt}, I want you to generate me a valid JSON dict containg array containing some questions testing basic knowledge on what would be in a database schema for an app about "${prompt}". Index 0 should be the correct answer, and the rest should be incorrect answers. The questions should be formatted as follows: {question: "What is the capital of France?", options: ["Paris", "Berlin", "Madrid", "Rome"]}.`;
+		const neurelo_prompt = `Given the topic of: "${prompt}, I want you to generate me 1 valid JSON dict containg array containing some questions testing basic knowledge on what would be in a database schema for an app about "${prompt}". Index 0 should be the correct answer, and the rest should be incorrect answers. The questions should be formatted as follows: {question: "What is the capital of France?", options: ["Paris", "Berlin", "Madrid", "Rome"]}.`;
 		fetch("/api/gemma?prompt=" + neurelo_prompt).then((res) => {
 			res.json().then((data) => {
 				console.log();
@@ -40,19 +40,21 @@ const Page = () => {
 			});
 		});
 		setPage((prev) => prev + 1);
-	}, []); // topic
+	}, [prompt]);
 	const restart = () => {
 		setPage(0);
 		setHealth(3);
 	};
 
 	const pages = [
-		<Home key='0' setPage={setPage} setPrompt={setPrompt} setSchema={setSchema} />,
+		<Home key='0' setPage={setPage} setSchema={setSchema} />,
 		<RoadMap key='1' setPage={setPage} index={0} />,
 		<Learning
 			key='1'
 			setPage={setPage}
 			paragraph={sections[0].text}
+			setPrompt={setPrompt}
+			setSchema={setSchema}
 			titleImage={sections[0].image}
 		/>,
 		<Quiz key='3' setPage={setPage} setHealth={setHealth} correct={questionSet[0]} options={questionSet} question={question} />,
