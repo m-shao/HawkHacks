@@ -84,16 +84,16 @@ const Page = () => {
 		<Faliure key='9' score={score} restart={restart} />,
 		<RoadMap key='10' setPage={setPage} index={1} />,
 		<Quiz
-			key='3'
+			key='11'
 			setPage={setPage}
 			setHealth={setHealth}
 			correct={questionSet[0]}
 			options={questionSet}
 			question={question}
 		/>,
-		<RoadMap key='4' setPage={setPage} index={1} />,
-		<Success key='5' score={score} restart={restart} />,
-		<Faliure key='6' score={score} restart={restart} />,
+		<RoadMap key='12' setPage={setPage} index={1} />,
+		<Success key='13' score={score} restart={restart} />,
+		<Faliure key='14' score={score} restart={restart} />,
 	];
 
 	useEffect(() => {

@@ -20,7 +20,7 @@ const Information = ({ setPage, schema }) => {
 					<div>
 						<pre>
 							{JSON.stringify(schema, null, 2).replace(
-								'\n',
+								'\\n',
 								'<br/>'
 							)}
 						</pre>
