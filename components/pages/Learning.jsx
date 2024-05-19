@@ -4,11 +4,20 @@ import { useEffect, useState } from "react";
 
 import Image from "next/image";
 
-import BackButton from "@/components/BackButton.jsx";
-
-const Learning = ({ paragraph, titleImage }) => {
+const Learning = ({ paragraph, titleImage, setPage }) => {
   const [topic, setTopic] = useState("");
   const [dataset, setDataset] = useState({});
+
+  const generateDataset = (e) => {
+    e.preventDefault();
+    let prompt = `Can you please generate me a mongodb database schema for "${topic}"? So like a db schema that would work for that topic. Please output the schema in JSON format. RAW JSON no extra stuff.`;
+    fetch("/api/gemma?prompt=" + prompt).then((res) => {
+      res.json().then((data) => {
+        setDataset(data.response);
+      });
+    });
+    setPage((prev) => prev + 1);
+  };
 
   const generateDataset = () => {
     let prompt = `Please generate a mongoDB compatible db schema for "${topic}. So to be clear, I want you to output a raw JSON schema that can be used for a database for "${topic}".`;
