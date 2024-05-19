@@ -1,5 +1,5 @@
 {
-  "name": "my-app",
+  "name": "hawk-hacks",
   "version": "0.1.0",
   "private": true,
   "scripts": {
@@ -10,6 +10,7 @@
   },
   "dependencies": {
     "framer-motion": "^11.2.4",
+    "@google/generative-ai": "^0.11.3",
     "mongodb": "^6.6.2",
     "next": "14.2.3",
     "react": "^18",
