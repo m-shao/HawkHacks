@@ -16,8 +16,8 @@ const Learning = ({ setPage, setPrompt, setSchema }) => {
 							setPage((prev) => prev + 1);
 		let prompt = `Please check if this query: "${topic} for mongoDB is valid and will work as expected. Please export your answer as either "yes" or "no" and nothing else`;
 		fetch('/api/gemma?prompt=' + prompt).then((res) => {
-			res.json().then((data) => {
-				if (valid.includes('yes')) {
+			res.text().then((data) => {
+				if (data.includes('yes')) {
 					setPage((prev) => prev + 1);
 				} else {
 					setPage((prev) => prev - 1);
