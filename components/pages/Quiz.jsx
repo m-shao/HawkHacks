@@ -2,11 +2,8 @@ import Image from 'next/image';
 
 import text from '@/assets/quiz/text.png';
 
-const Quiz = ({ setHealth, setPage }) => {
-	//question, options, correct,
-	const question = 'What is the capital of France?';
-	const options = ['Paris', 'Berlin', 'Madrid', 'Rome'];
-	const correct = 'Paris';
+const Quiz = ({ setHealth, setPage, question, options, correct }) => {
+
 
 	const handleClick = (e) => {
 		if (e.target.innerText === correct) {

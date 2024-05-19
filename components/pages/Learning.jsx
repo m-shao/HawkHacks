@@ -6,16 +6,15 @@ import BackButton from "@/components/BackButton";
 import { sections } from "@/config/pages/sections";
 import Image from "next/image";
 
-const Learning = ({ paragraph, titleImage, setPage }) => {
+const Learning = ({ paragraph, titleImage, setPage, setPrompt, setSchema }) => {
   const [topic, setTopic] = useState("");
-  const [dataset, setDataset] = useState({});
 
   const generateDataset = (e) => {
     e.preventDefault();
     let prompt = `Please generate a mongoDB compatible db schema for an app about "${topic}. So to be clear, I want you to output a raw JSON schema that can be used for a database for "${topic}".`;
     fetch("/api/gemma?prompt=" + prompt).then((res) => {
       res.json().then((data) => {
-        setDataset(data.response);
+        setSchema(data.response);
       });
     });
     setPage((prev) => prev + 1);
@@ -43,6 +42,7 @@ const Learning = ({ paragraph, titleImage, setPage }) => {
             value={topic}
             onChange={(e) => {
               setTopic(e.target.value);
+              setPrompt(e.target.value);
             }}
             type="text"
           />
