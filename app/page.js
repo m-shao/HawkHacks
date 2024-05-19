@@ -12,6 +12,7 @@ import Faliure from '@/components/pages/Faliure';
 import Success from '@/components/pages/Success';
 import Information from '@/components/pages/Information';
 import Information2 from '@/components/pages/Information2';
+import DisplayData from '@/components/pages/DisplayData';
 
 import BackButton from '@/components/BackButton';
 import HealthBar from '@/components/HealthBar';
@@ -32,7 +33,7 @@ const Page = () => {
 		if (prompt === '') return;
 		// const generateQuestionset = () => {
 		const neurelo_prompt = `Given the topic of: "${prompt}, I want you to generate me RAW valid JSON dict containg array containing some questions testing basic knowledge a mongodb schema for an app about "${prompt}". Index 0 should be the correct answer, and the rest should be incorrect answers. The questions should be formatted as follows: questions: {{question: "What is the capital of France?", options: ["Paris", "Berlin", "Madrid", "Rome"]}}. The most important parts are it's only 1 dict and it's perfectly valid JSON, don't wrap in anything, it's being directly passed into JSON.parse  `;
-		fetch("/api/gemma?prompt=" + neurelo_prompt).then((res) => {
+		fetch('/api/gemma?prompt=' + neurelo_prompt).then((res) => {
 			res.json().then((data) => {
 				console.log();
 				const parsed = JSON.parse(data.response);
@@ -74,9 +75,10 @@ const Page = () => {
 		/>,
 		<Information2 key='5' setPage={setPage} />,
 		<Learning2 key='6' setPage={setPage} setPrompt={setPrompt} />,
-		<Success key='7' score={score} restart={continueGame} />,
-		<Faliure key='8' score={score} restart={restart} />,
-		<RoadMap key='9' setPage={setPage} index={1} />,
+		<DisplayData key='7' setPage={setPage} schema={schema} />,
+		<Success key='8' score={score} restart={continueGame} />,
+		<Faliure key='9' score={score} restart={restart} />,
+		<RoadMap key='10' setPage={setPage} index={1} />,
 		<Quiz
 			key='3'
 			setPage={setPage}
