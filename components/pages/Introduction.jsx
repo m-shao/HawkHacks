@@ -8,12 +8,12 @@ import introduction from '@/assets/introduction/text.png';
 
 import BackButton from '@/components/BackButton.jsx';
 
-const Introduction = () => {
+const Introduction = ({ setPage }) => {
 	const [topic, setTopic] = useState('');
 
 	return (
 		<div className='w-screen h-screen bg-explain-bg flex flex-col gap-6 items-center'>
-			<BackButton />
+			<BackButton setPage={setPage} />
 			<div className='w-full flex flex-col items-center gap-8 justify-center h-full'>
 				<Image alt='introduction text' src={introduction} />
 				<div className='w-full max-w-[55rem] text- p-6 text-2xl text-black bg-white rounded-2xl shadow-2xl leading-10'>

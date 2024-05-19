@@ -1,8 +1,14 @@
 import React from 'react';
 
-const BackButton = () => {
+const BackButton = ({ setPage }) => {
+	const handleClick = () => {
+		setPage((prev) => prev - 1);
+	};
+
 	return (
-		<div className='p-1 bg-white rounded-xl fixed top-6 left-6'>
+		<button
+			onClick={handleClick}
+			className=' p-1 bg-white rounded-xl fixed top-6 left-6'>
 			<div className='p-4 bg-green-800 rounded-xl'>
 				<svg
 					xmlns='http://www.w3.org/2000/svg'
@@ -18,7 +24,7 @@ const BackButton = () => {
 					/>
 				</svg>
 			</div>
-		</div>
+		</button>
 	);
 };
 
