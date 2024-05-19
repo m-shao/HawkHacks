@@ -12,7 +12,7 @@ const Information = ({ setPage }) => {
 		<div
 			onClick={() => setPage((prev) => prev + 1)}
 			className='w-screen h-screen bg-explain-bg flex flex-col gap-6 items-center'>
-			<BackButton />
+			<BackButton setPage={setPage} />
 			<div className='w-full flex flex-col items-center gap-8 justify-center h-full'>
 				<Image alt='title text' src={titleImage} />
 				<div className='w-full max-w-[55rem] text- p-6 text-2xl text-black bg-white rounded-2xl shadow-2xl leading-10'>
