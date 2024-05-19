@@ -1,5 +1,5 @@
 import { NextResponse } from "next/server";
-import generateSchema from "./gemini";
+import generateSchema from "./gemma";
 
 export async function GET(req) {
   const { searchParams } = new URL(req.url);
