@@ -3,32 +3,34 @@
 import { useState } from "react";
 import BackButton from "@/components/BackButton";
 
-import { sections } from "@/config/pages/sections";
 import Image from "next/image";
 
 import titleImage from "@/assets/query-text.png";
 
-const Learning = ({ setPage, setPrompt, setSchema }) => {
+const Learning = ({ setPage, schema }) => {
   const [topic, setTopic] = useState("");
 
-  const generateDataset = (e) => {
-    e.preventDefault();
-    setPage((prev) => prev + 1);
-    let prompt = `Please check if this query: "${topic} for mongoDB is valid and will work as expected. Please export your answer as either "yes" or "no" and nothing else`;
-    fetch("/api/gemma?prompt=" + prompt).then((res) => {
-      res.text().then((data) => {
-        if (data.includes("yes")) {
-          setPage((prev) => prev + 1);
-        } else {
-          setPage((prev) => prev - 1);
-        }
-      });
-    });
-  };
+	const generateDataset = (e) => {
+		e.preventDefault();
+
+		let prompt = `Please check if this query: "${topic} for mongoDB is valid and will work as expected. Please export your answer as either "yes" or "no". Do not include anything else and use any other values.`;
+		fetch("/api/gemma?prompt=" + prompt).then((res) => {
+			res.text().then((data) => {
+				if (data.response !== undefined) {
+					data = data.response;
+				}
+
+				if (!/\b(true|yes)\b/i.test(data.toLowerCase())) {
+					setPage((prev) => prev - 10);
+				} else {
+					setPage((prev) => prev + 1);
+				}
+			});
+		});
+	};
 
   const handleChange = (e) => {
     setTopic(e.target.value);
-    setPrompt(e.target.value);
   };
 
   return (

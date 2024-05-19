@@ -73,7 +73,7 @@ const Page = () => {
 			question={question}
 		/>,
 		<Information2 key='5' setPage={setPage} />,
-		<Learning2 key='6' setPage={setPage} setPrompt={setPrompt} />,
+		<Learning2 key='6' setPage={setPage} />,
 		<Success key='7' score={score} restart={continueGame} />,
 		<Faliure key='8' score={score} restart={restart} />,
 		<RoadMap key='9' setPage={setPage} index={1} />,
