@@ -14,10 +14,6 @@ import BackButton from '@/components/BackButton';
 import HealthBar from '@/components/HealthBar';
 
 import { sections } from '@/config/pages/sections';
-//question, options, correct,
-const question = 'What is the capital of France?';
-const options = ['Paris', 'Berlin', 'Madrid', 'Rome'];
-const correct = 'Paris';
 
 
 
@@ -33,8 +29,8 @@ const Page = () => {
 
 	useEffect(() => {
 		if (prompt === "") return;
-			// const generateQuestionset = () => {
-			const neurelo_prompt = `Given the topic of: "${prompt}, I want you to generate me a valid JSON dict containg array containing some questions testing basic knowledge on what would be in a database schema for an app about "${prompt}". Index 0 should be the correct answer, and the rest should be incorrect answers. The questions should be formatted as follows: {question: "What is the capital of France?", options: ["Paris", "Berlin", "Madrid", "Rome"]}.`;
+		// const generateQuestionset = () => {
+		const neurelo_prompt = `Given the topic of: "${prompt}, I want you to generate me a valid JSON dict containg array containing some questions testing basic knowledge on what would be in a database schema for an app about "${prompt}". Index 0 should be the correct answer, and the rest should be incorrect answers. The questions should be formatted as follows: {question: "What is the capital of France?", options: ["Paris", "Berlin", "Madrid", "Rome"]}.`;
 		fetch("/api/gemma?prompt=" + neurelo_prompt).then((res) => {
 			res.json().then((data) => {
 				console.log();
