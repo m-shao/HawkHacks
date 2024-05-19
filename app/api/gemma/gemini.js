@@ -5,8 +5,6 @@ const genAI = new GoogleGenerativeAI(process.env.GEMINI_KEY);
 const model = genAI.getGenerativeModel({ model: "gemini-pro" });
 
 export default async function generateSchema(prompt) {
-
   const result = await model.generateContent(prompt);
-  const response = await result.response;
-  return response.text();
+  return result.response.text();
 }
