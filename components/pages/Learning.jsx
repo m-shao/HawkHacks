@@ -2,6 +2,7 @@
 
 import { useState } from "react";
 import BackButton from "@/components/BackButton";
+import { schema } from "@/config/backups";
 
 import Image from "next/image";
 
@@ -11,13 +12,20 @@ const Learning = ({ paragraph, titleImage, setPage, setPrompt, setSchema }) => {
   const generateDataset = (e) => {
     e.preventDefault();
     let prompt = `Please generate a mongoDB compatible db schema for an app about "${topic}. So to be clear, I want you to output a raw JSON schema that can be used for a database for "${topic}".`;
-    fetch("/api/gemma?prompt=" + prompt).then((res) => {
-      res.json().then((data) => {
-        setSchema(data.response);
+    try {
+      fetch("/api/gemma?prompt=" + prompt).then((res) => {
+        res.json().then((data) => {
+          setSchema(data.response);
+        });
       });
-    });
-    setPage((prev) => prev + 1);
-    setPrompt(e.target.value);
+      setPrompt(topic);
+      setPage((prev) => prev + 1);
+    } catch (e) {
+      setPrompt(topic);
+
+      setSchema(schema);
+      setPage((prev) => prev + 1);
+    }
   };
 
   return (

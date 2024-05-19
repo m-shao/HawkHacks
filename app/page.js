@@ -30,16 +30,27 @@ const Page = () => {
 
 	useEffect(() => {
 		if (prompt === '') return;
-		// const generateQuestionset = () => {
-		const neurelo_prompt = `Given the topic of: "${prompt}, I want you to generate me RAW valid JSON dict containg array containing some questions testing basic knowledge a mongodb schema for an app about "${prompt}". Index 0 should be the correct answer, and the rest should be incorrect answers. The questions should be formatted as follows: questions: {{question: "What is the capital of France?", options: ["Paris", "Berlin", "Madrid", "Rome"]}}. The most important parts are it's only 1 dict and it's perfectly valid JSON, don't wrap in anything, it's being directly passed into JSON.parse  `;
-		fetch("/api/gemma?prompt=" + neurelo_prompt).then((res) => {
-			res.json().then((data) => {
-				console.log();
-				const parsed = JSON.parse(data.response);
-				setQuestionSet(parsed.questions[0].options);
-				setQuestion(parsed.questions[0].question);
+		console.log(prompt)
+		const neurelo_prompt = `Given the topic of: "${prompt}, I want you to generate me RAW valid JSON dict containg array containing some questions testing basic knowledge a mongodb schema for an app centered "${prompt}" so like relate the questions to that app. Index 0 should be the correct answer, and the rest should be incorrect answers. The questions should be formatted as follows: questions: {{question: "What is the capital of France?", options: ["Paris", "Berlin", "Madrid", "Rome"]}}. The most important parts are it's only 1 dict and it's perfectly valid JSON, don't wrap in anything, it's being directly passed into JSON.parse  `;
+		try {
+			fetch("/api/gemma?prompt=" + neurelo_prompt).then((res) => {
+				res.json().then((data) => {
+					const parsed = JSON.parse(data.response);
+					setQuestionSet(parsed.questions[0].options);
+					setQuestion(parsed.questions[0].question);
+				})
 			});
-		});
+		}
+		catch (e) {
+			console.log("req failed - page.js")
+			setQuestionSet([
+				"A set of rules that define the structure of a document in a MongoDB collection.",
+				"A type of database that uses a document-oriented data model.",
+				"A language used to query MongoDB databases.",
+				"A tool for creating and managing MongoDB collections."
+			]);
+			setQuestion("What's a MongoDB Schema?");
+		}
 		setPage((prev) => prev + 1);
 	}, [prompt]);
 	const restart = () => {

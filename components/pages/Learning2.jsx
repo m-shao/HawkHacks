@@ -7,27 +7,31 @@ import Image from "next/image";
 
 import titleImage from "@/assets/query-text.png";
 
-const Learning = ({ setPage, schema }) => {
+const Learning = ({ setPage }) => {
   const [topic, setTopic] = useState("");
 
-	const generateDataset = (e) => {
-		e.preventDefault();
+  const generateDataset = (e) => {
+    e.preventDefault();
 
-		let prompt = `Please check if this query: "${topic} for mongoDB is valid and will work as expected. Please export your answer as either "yes" or "no". Do not include anything else and use any other values.`;
-		fetch("/api/gemma?prompt=" + prompt).then((res) => {
-			res.text().then((data) => {
-				if (data.response !== undefined) {
-					data = data.response;
-				}
+    let prompt = `Please check if this query: "${topic} for mongoDB is valid and will work as expected. Please export your answer as either "yes" or "no". Do not include anything else and use any other values.`;
+    try {
+      fetch("/api/gemma?prompt=" + prompt).then((res) => {
+        res.text().then((data) => {
+          if (data.response !== undefined) {
+            data = data.response;
+          }
 
-				if (!/\b(true|yes)\b/i.test(data.toLowerCase())) {
-					setPage((prev) => prev - 10);
-				} else {
-					setPage((prev) => prev + 1);
-				}
-			});
-		});
-	};
+          if (!/\b(true|yes)\b/i.test(data.toLowerCase())) {
+            setPage((prev) => prev - 10);
+          } else {
+            setPage((prev) => prev + 1);
+          }
+        });
+      });
+    } catch (e) {
+      setPage((prev) => prev + 1);
+    }
+  };
 
   const handleChange = (e) => {
     setTopic(e.target.value);

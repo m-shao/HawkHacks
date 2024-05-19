@@ -1,6 +1,5 @@
 'use client';
 
-import { useState } from 'react';
 import BackButton from '@/components/BackButton';
 
 import Image from 'next/image';
